@@ -4,16 +4,19 @@ import 'dart:convert';
 import '../model/job_description.dart';
 import '../util/job_description_item_util.dart';
 
-class FileConverter {
-  static const String filePath = 'assets/FINAL_fiche_metier.txt';
+import 'package:flutter/services.dart' show rootBundle;
 
-  List<JobDescription> convertFileToJobDescriptionList() {
+class FileConverter {
+  static const String filePath = 'assets/final_fiche_metier.txt';
+
+  Future<List<JobDescription>> convertFileToJobDescriptionList() async {
     List<JobDescription> jobDescriptionEntities = [];
     List<Map<String, String>>? jobDescriptionMapList;
     try {
-      jobDescriptionMapList = getJobDescriptionMapList();
+      jobDescriptionMapList = await getJobDescriptionMapList();
     } catch (e) {
       print(e);
+
     }
 
     if (jobDescriptionMapList != null) {
@@ -39,11 +42,12 @@ class FileConverter {
         jobDescriptionEntities.add(jobDescription);
       }
     }
+
     return jobDescriptionEntities;
   }
 
-  List<Map<String, String>> getJobDescriptionMapList() {
-    String fileContent = File(filePath).readAsStringSync();
+  Future<List<Map<String, String>>> getJobDescriptionMapList() async {
+    String fileContent = await rootBundle.loadString(filePath);
     List<Map<String, String>> jobDescriptionMapList = initJobDescriptionMapList();
     Map<String, List<String>> jobDescriptionMap = buildJobDescriptionMap(fileContent);
     List<String> items = JobDescriptionItemUtil.JOB_DESCRIPTIONS_ITEMS;
@@ -53,7 +57,6 @@ class FileConverter {
         jobDescriptionMapList[i][item] = jobDescriptionMap[item]![i];
       }
     }
-
 
     return jobDescriptionMapList;
   }

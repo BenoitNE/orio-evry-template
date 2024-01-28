@@ -145,4 +145,35 @@ class JobDescriptionFilter {
       }
     }
   }
+
+  List<String> getSectorForFilter(List<JobDescription> jobDescriptions) {
+    List<String> results = [];
+
+    for (JobDescription jobDescription in jobDescriptions) {
+      for (String sector in jobDescription.sectors!) {
+        if (!results.contains(sector)) {
+          results.add(sector);
+        }
+      }
+    }
+
+    return results;
+  }
+
+  List<JobDescription> getFilteredJobDescriptionBySector(
+      List<JobDescription> jobDescriptions, List<String> sectors) {
+    List<JobDescription> copy = [];
+
+    for (JobDescription jobDescription in copy) {
+      for (String sector in sectors) {
+        if (jobDescription.sectors!.contains(sector)) {
+          jobDescriptions.remove(jobDescription);
+        }
+      }
+    }
+
+    jobDescriptions.sort((a, b) => b.userScore.compareTo(a.userScore));
+
+    return jobDescriptions;
+  }
 }

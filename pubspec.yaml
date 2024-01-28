@@ -65,7 +65,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/FINAL_fiche_metier.txt
+    - assets/
+    - assets/final_fiche_metier.txt
+    - assets/sectors/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

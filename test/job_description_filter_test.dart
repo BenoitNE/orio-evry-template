@@ -80,9 +80,6 @@ void main() {
       JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[11],
     ]);
 
-    print(filteredJobDescriptions[0].job);
-    print(filteredJobDescriptions[0].sectorsToSearch);
-
     expect(filteredJobDescriptions[558].userScore, 0);
 
     expect(filteredJobDescriptions[0].userScore,
@@ -111,6 +108,7 @@ void main() {
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
         fileConverter.convertFileToJobDescriptionList();
+
     List<String> negativeSentences = [
       "je ne suis pas attiré par le secteur qui concerne l'assistance et les soins aux personnes dans le besoin.",
       "je ne suis pas attiré par les interactions humaines et les relations communautaires.",
