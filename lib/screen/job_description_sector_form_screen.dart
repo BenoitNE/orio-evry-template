@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orio_evry_template/service/job_description_filter.dart';
+import 'package:orio_evry_template/util/helper_util.dart';
 import '../util/color_util.dart';
 import '../util/font_util.dart';
 import '../util/job_description_form_util.dart';
@@ -31,7 +32,7 @@ class _JobDescriptionSectorFormScreenState
 
   @override
   void initState() {
-    _sectors = JobDescriptionFormUtil.jobDescriptionFineTuneForm!.contents!;
+    _sectors = JobDescriptionFormUtil.sectors!;
     _itemQuantityMax = _sectors.length;
     super.initState();
   }
@@ -133,5 +134,6 @@ class _JobDescriptionSectorFormScreenState
             JobDescriptionFormUtil.jobDescriptions!,
             _selectedSectors);
     Navigator.pushNamed(context, _forwardScreenPath);
+
   }
 }

@@ -6,11 +6,12 @@ import 'package:orio_evry_template/util/job_description_item_util.dart';
 import 'package:orio_evry_template/util/job_description_score_util.dart';
 
 void main() {
-  test('studyDurationFilter_OneSelectedItem', () {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  test('studyDurationFilter_OneSelectedItem', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
     List<JobDescription> filteredJobDescriptions = jobDescriptionFilter
         .getFilteredJobDescriptionByStudyDuration(
             jobDescriptions, [JobDescriptionItemUtil.STUDY_DURATION_LONG]);
@@ -18,11 +19,11 @@ void main() {
     expect(filteredJobDescriptions.length, equals(122));
   });
 
-  test('studyDurationFilter_TwoSelectedItem', () {
+  test('studyDurationFilter_TwoSelectedItem', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
     List<JobDescription> filteredJobDescriptions = jobDescriptionFilter
         .getFilteredJobDescriptionByStudyDuration(jobDescriptions, [
       JobDescriptionItemUtil.STUDY_DURATION_LONG,
@@ -32,11 +33,11 @@ void main() {
     expect(filteredJobDescriptions.length, equals(223));
   });
 
-  test('PersonalityTraitsFamilySearchFilter', () {
+  test('PersonalityTraitsFamilySearchFilter', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
     List<JobDescription> filteredJobDescriptions = jobDescriptionFilter
         .getUpdatedJobDescriptionByPersonalityTraitsFamily(jobDescriptions, [
       JobDescriptionItemUtil.PERSONALITY_TRAITS_FAMILY_ELEMENTS[4],
@@ -50,11 +51,11 @@ void main() {
         equals(JobDescriptionScoreUtil.PERSONALITY_TRAITS_FAMILY_SCORE * 3));
   });
 
-  test('SchoolSubjectsSearchFilter', () {
+  test('SchoolSubjectsSearchFilter', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
     List<JobDescription> filteredJobDescriptions = jobDescriptionFilter
         .getUpdatedJobDescriptionBySchoolSubjectsFamily(jobDescriptions, [
       JobDescriptionItemUtil.SCHOOL_SUBJECTS_FAMILY_ELEMENTS[6],
@@ -68,11 +69,11 @@ void main() {
         equals(JobDescriptionScoreUtil.SCHOOL_SUBJECTS_FAMILY_SCORE * 2));
   });
 
-  test('SectorSearchFilter', () {
+  test('SectorSearchFilter', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
     List<JobDescription> filteredJobDescriptions = jobDescriptionFilter
         .getUpdatedJobDescriptionBySectorFamily(jobDescriptions, [
       JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[4],
@@ -86,11 +87,11 @@ void main() {
         equals(JobDescriptionScoreUtil.SECTOR_FAMILY_SCORE));
   });
 
-  test('getNegativeSentenceForFilter', () {
+  test('getNegativeSentenceForFilter', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
     List<JobDescription> selectedJobDescriptions = [];
     int negativeSentenceQuantity = 8;
 
@@ -103,11 +104,11 @@ void main() {
     expect(negativesSentences.length, equals(negativeSentenceQuantity));
   });
 
-  test('filteredJobDescriptionByNegativeSentence', () {
+  test('filteredJobDescriptionByNegativeSentence', () async {
     FileConverter fileConverter = FileConverter();
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
-        fileConverter.convertFileToJobDescriptionList();
+        await fileConverter.convertFileToJobDescriptionList();
 
     List<String> negativeSentences = [
       "je ne suis pas attiré par le secteur qui concerne l'assistance et les soins aux personnes dans le besoin.",
@@ -214,5 +215,43 @@ void main() {
     expect(jobDescriptions[7].star, equals(expectedResponse_07));
     expect(jobDescriptions[8].star, equals(expectedResponse_08));
     expect(jobDescriptions[9].star, equals(expectedResponse_09));
+  });
+
+  test('AllFilter', () async {
+    FileConverter fileConverter = FileConverter();
+    JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
+    List<JobDescription> jobDescriptions =
+        await fileConverter.convertFileToJobDescriptionList();
+
+    List<JobDescription> filteredJobDescriptions = jobDescriptionFilter
+        .getFilteredJobDescriptionByStudyDuration(
+        jobDescriptions, [JobDescriptionItemUtil.STUDY_DURATION_LONG]);
+
+    filteredJobDescriptions = jobDescriptionFilter
+        .getUpdatedJobDescriptionByPersonalityTraitsFamily(filteredJobDescriptions, [
+      JobDescriptionItemUtil.PERSONALITY_TRAITS_FAMILY_ELEMENTS[4],
+      JobDescriptionItemUtil.PERSONALITY_TRAITS_FAMILY_ELEMENTS[7],
+      JobDescriptionItemUtil.PERSONALITY_TRAITS_FAMILY_ELEMENTS[11],
+    ]);
+
+    filteredJobDescriptions = jobDescriptionFilter
+        .getUpdatedJobDescriptionBySchoolSubjectsFamily(filteredJobDescriptions, [
+      JobDescriptionItemUtil.SCHOOL_SUBJECTS_FAMILY_ELEMENTS[6],
+      JobDescriptionItemUtil.SCHOOL_SUBJECTS_FAMILY_ELEMENTS[4],
+      JobDescriptionItemUtil.SCHOOL_SUBJECTS_FAMILY_ELEMENTS[9],
+    ]);
+
+    filteredJobDescriptions = jobDescriptionFilter
+        .getUpdatedJobDescriptionBySectorFamily(filteredJobDescriptions, [
+      JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[4],
+      JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[7],
+      JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[11],
+    ]);
+
+    for(JobDescription jobDescription in filteredJobDescriptions){
+      print("${jobDescription.job} | score: ${jobDescription.userScore}}");
+    }
+
+    expect(filteredJobDescriptions.length, equals(122));
   });
 }

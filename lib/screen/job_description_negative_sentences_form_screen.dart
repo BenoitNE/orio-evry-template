@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:orio_evry_template/util/helper_util.dart';
 import '../model/job_description_fine_tune_form.dart';
 import '../service/job_description_filter.dart';
 import '../util/color_util.dart';
@@ -138,9 +139,10 @@ class _JobDescriptionNegativeSentencesFormScreenState
     JobDescriptionFormUtil.jobDescriptions =
         jobDescriptionFilter.getFilteredJobDescriptionByNegativeSentence(
             JobDescriptionFormUtil.jobDescriptions!,
-            JobDescriptionFormUtil.negativeSentences!);
+            _selectedNegativeSentences);
     JobDescriptionFormUtil.sectors = jobDescriptionFilter
         .getSectorForFilter(JobDescriptionFormUtil.jobDescriptions!);
     Navigator.pushNamed(context, RoutingUtil.jobDescriptionSectorFormScreen);
+
   }
 }
