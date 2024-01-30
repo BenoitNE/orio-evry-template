@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:orio_evry_template/service/file_converter.dart';
 import 'package:orio_evry_template/service/job_description_filter.dart';
@@ -9,6 +7,7 @@ import '../model/job_description.dart';
 import '../util/color_util.dart';
 import '../util/font_util.dart';
 import '../util/job_description_form_util.dart';
+
 import '../util/routing_util.dart';
 import '../widget/appbar_form_widget.dart';
 import '../widget/button_form_widget.dart';
@@ -153,79 +152,76 @@ class _JobDescriptionSchoolSubjectFormScreenState
   }
 
   void _fetchNegativeSentences() async {
-
-    JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     FileConverter fileConverter = FileConverter();
+    JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
     List<JobDescription> jobDescriptions =
         await fileConverter.convertFileToJobDescriptionList();
 
-    HelperUtil.printForm(jobDescriptions);
+    List<JobDescription> filteredJobDescriptions =
+        jobDescriptionFilter.getFilteredJobDescriptionByStudyDuration(
+            jobDescriptions, _getStudyDurations());
 
-    // List<JobDescription> filteredJobDescriptionByStudyDuration =
-    //     jobDescriptionFilter.getFilteredJobDescriptionByStudyDuration(
-    //         jobDescriptions, _getStudyDurations());
-    //
-    // HelperUtil.printForm(filteredJobDescriptionByStudyDuration);
-    //
-    // List<JobDescription> filteredJobDescriptionBySectorFamily = jobDescriptionFilter.getUpdatedJobDescriptionBySectorFamily(
-    //     filteredJobDescriptionByStudyDuration, _getSector());
-    //
-    // HelperUtil.printForm(filteredJobDescriptionBySectorFamily);
-    //
-    // List<JobDescription> filteredJobDescriptionByPersonalityTraitsFamily = jobDescriptionFilter.getUpdatedJobDescriptionByPersonalityTraitsFamily(
-    //     filteredJobDescriptionBySectorFamily, _getPersonalityTraits());
-    //
-    // HelperUtil.printForm(filteredJobDescriptionByPersonalityTraitsFamily);
+    filteredJobDescriptions =
+        jobDescriptionFilter.getUpdatedJobDescriptionByPersonalityTraitsFamily(
+            filteredJobDescriptions, _getPersonalityTraits());
 
-
-    jobDescriptionFilter
+    filteredJobDescriptions = jobDescriptionFilter
         .getUpdatedJobDescriptionBySchoolSubjectsFamily(
-        JobDescriptionFormUtil.jobDescriptions, _responses)
-        .sort((a, b) => b.userScore.compareTo(a.userScore));
+            filteredJobDescriptions, _getSchoolSubject());
+
+    filteredJobDescriptions = jobDescriptionFilter
+        .getUpdatedJobDescriptionBySectorFamily(filteredJobDescriptions, _getSector());
 
     for (int i = 0; i < jobDescriptionQuantity; i++) {
-      JobDescriptionFormUtil.jobDescriptions!.add(JobDescriptionFormUtil.jobDescriptions[i]);
+      JobDescriptionFormUtil.jobDescriptions!
+          .add(filteredJobDescriptions[i]);
     }
 
     JobDescriptionFormUtil.negativeSentences = jobDescriptionFilter
         .getNegativeSentenceForFilter(JobDescriptionFormUtil.jobDescriptions!);
 
     if (JobDescriptionFormUtil.negativeSentences!.isEmpty) {
-      JobDescriptionFormUtil.jobDescriptions =
-          jobDescriptionFilter.getFilteredJobDescriptionByNegativeSentence(
-              JobDescriptionFormUtil.jobDescriptions!,
-              JobDescriptionFormUtil.negativeSentences!);
       JobDescriptionFormUtil.sectors = jobDescriptionFilter
           .getSectorForFilter(JobDescriptionFormUtil.jobDescriptions!);
       Navigator.pushNamed(context, RoutingUtil.jobDescriptionSectorFormScreen);
-      // HelperUtil.printForm();
     } else {
       Navigator.pushNamed(
           context, RoutingUtil.jobDescriptionNegativeSentencesFormScreen);
-      // HelperUtil.printForm();
+
     }
   }
 
-  List<String> _getStudyDurations(){
+  List<String> _getStudyDurations() {
     List<String> studyDurationsText = [];
-    for(int i = 0; i< JobDescriptionFormUtil.studyDurations!.length; i++){
+    for (int i = 0; i < JobDescriptionFormUtil.studyDurations!.length; i++) {
       studyDurationsText.add(JobDescriptionItemUtil.STUDY_DURATION_LIST[i]);
     }
     return studyDurationsText;
   }
 
-  List<String> _getSector(){
+  List<String> _getSchoolSubject() {
+    List<String> studyDurationsText = [];
+    for (int i = 0; i < _responses.length; i++) {
+      studyDurationsText.add(JobDescriptionItemUtil.SCHOOL_SUBJECTS_FAMILY_ITEM[int.parse(_responses![i])]);
+    }
+    return studyDurationsText;
+  }
+
+  List<String> _getSector() {
     List<String> studySectorText = [];
-    for(int i = 0; i< JobDescriptionFormUtil.sectorFamilies!.length; i++){
-      studySectorText.add(JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[i]);
+    for (int i = 0; i < JobDescriptionFormUtil.sectorFamilies!.length; i++) {
+      studySectorText.add(JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[int.parse(JobDescriptionFormUtil.sectorFamilies![i])]);
     }
     return studySectorText;
   }
 
-  List<String> _getPersonalityTraits(){
+  List<String> _getPersonalityTraits() {
     List<String> studyPersonalityText = [];
-    for(int i = 0; i< JobDescriptionFormUtil.personalityTraitFamilies!.length; i++){
-      studyPersonalityText.add(JobDescriptionItemUtil.PERSONALITY_TRAITS_FAMILY_ELEMENTS[i]);
+    for (int i = 0;
+        i < JobDescriptionFormUtil.personalityTraitFamilies!.length;
+        i++) {
+      studyPersonalityText
+          .add(JobDescriptionItemUtil.PERSONALITY_TRAITS_FAMILY_ELEMENTS[int.parse(JobDescriptionFormUtil.personalityTraitFamilies![i])]);
     }
     return studyPersonalityText;
   }

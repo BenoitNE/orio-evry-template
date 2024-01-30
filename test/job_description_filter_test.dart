@@ -248,10 +248,9 @@ void main() {
       JobDescriptionItemUtil.SECTOR_FAMILY_ELEMENTS[11],
     ]);
 
-    for(JobDescription jobDescription in filteredJobDescriptions){
-      print("${jobDescription.job} | score: ${jobDescription.userScore}}");
-    }
 
+    expect(filteredJobDescriptions[0].job, equals ("Psychologue scolaire"));
+    expect(filteredJobDescriptions[1].job, equals ("Conseiller pénitentiaire d'insertion et de probation"));
     expect(filteredJobDescriptions.length, equals(122));
   });
 }

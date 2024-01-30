@@ -10,10 +10,9 @@ class HelperUtil{
     print("Personality traits : ${JobDescriptionFormUtil.personalityTraitFamilies}");
     print("Negative sentences : ${JobDescriptionFormUtil.negativeSentences}");
     print("Sectors : ${JobDescriptionFormUtil.sectors}");
-    print("Nombre de job : ${JobDescriptionFormUtil.jobDescriptions.length}");
+    print("Nombre de job : ${jobDescriptions.length}");
     for(int i = 0; i < 10; i++){
-      // print("${jobDescriptions[i].job} | score: ${JobDescriptionFormUtil.jobDescriptions[i].userScore} star: ${JobDescriptionFormUtil.jobDescriptions[i].star}");
-      print("${jobDescriptions[i].job}");
+      print("${jobDescriptions[i].job} + | Score: ${jobDescriptions[i].userScore}");
     }
     print("******************************************");
   }
