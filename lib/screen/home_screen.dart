@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orio_evry_template/screen/explore_data_screen.dart';
 import 'package:orio_evry_template/screen/job_description_study_durations_form_Screen.dart';
 
 import '../util/asset_path_util.dart';
@@ -52,6 +53,16 @@ class _HomeScreeState extends State<HomeScreen> {
                 Navigator.pushNamed(
                     context, RoutingUtil.jobDescriptionStudyDurationFormScreen);
               }),
+              const Padding(padding: EdgeInsets.only(top: 75.0)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const ExploreDataScreen()));
+                  },
+                  child: const Text(
+                    "Parcourir les 559 fiches métiers",
+                    style: TextStyle(color: ColorUtil.primary),
+                  )),
               const Padding(padding: EdgeInsets.only(top: 75.0)),
               Text(_version,
                   style: const TextStyle(color: ColorUtil.secondaryText)),

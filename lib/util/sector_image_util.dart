@@ -37,7 +37,7 @@ class SectorImageUtil {
       case "services publics et sociaux":
         return "assets/sectors/service_public_social.png";
 
-      case "transports et Logistique":
+      case "transports et logistique":
         return "assets/sectors/transport_logistique.png";
 
       case "commerce de gros et de détail":

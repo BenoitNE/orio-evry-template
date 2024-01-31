@@ -162,7 +162,7 @@ class JobDescriptionFilter {
 
   List<JobDescription> getFilteredJobDescriptionBySector(
       List<JobDescription> jobDescriptions, List<String> sectors) {
-    List<JobDescription> copy = [];
+    List<JobDescription> copy = List<JobDescription>.from(jobDescriptions);
 
     for (JobDescription jobDescription in copy) {
       for (String sector in sectors) {

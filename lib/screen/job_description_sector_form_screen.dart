@@ -133,6 +133,7 @@ class _JobDescriptionSectorFormScreenState
         jobDescriptionFilter.getFilteredJobDescriptionBySector(
             JobDescriptionFormUtil.jobDescriptions!,
             _selectedSectors);
+    jobDescriptionFilter.setJobDescriptionStar(JobDescriptionFormUtil.jobDescriptions);
     Navigator.pushNamed(context, _forwardScreenPath);
 
   }
