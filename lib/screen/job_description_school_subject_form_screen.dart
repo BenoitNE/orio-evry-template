@@ -29,7 +29,7 @@ class _JobDescriptionSchoolSubjectFormScreenState
   final int _itemQuantityMax = 3;
   final int jobDescriptionQuantity = 30;
   final String _title =
-      "Sélectionnez 3 matières qui vous semble la plus importantes pour votre future métier :";
+      "Sélectionnez 3 matières qui vous semble les plus importantes pour votre future métier :";
   final String _dialogError = "Le nombre d'items sélectionnés est incorrect.";
 
   final Map<String, String> _mappingItems = {
@@ -48,7 +48,7 @@ class _JobDescriptionSchoolSubjectFormScreenState
     "Technologie": "12",
     "Artisanat": "13",
     "Droit": "14",
-    "Mathématique": "15"
+    "Mathématiques": "15"
   };
 
   @override

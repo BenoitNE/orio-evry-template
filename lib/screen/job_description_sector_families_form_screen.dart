@@ -63,7 +63,7 @@ class _JobDescriptionSectorFamiliesFormScreenState
         "19",
     "J'aimes découvrir de nouvelles choses, résoudre des énigmes et repousser les limites de ce que nous savons déjà.":
         "20",
-    "J'aimerais évoluer professionnellement dans un domaine nécessitant du suivi financier et/ou de l'organisation de le traitement de documents.":
+    "J'aimerais évoluer professionnellement dans un domaine nécessitant du suivi financier et/ou de l'organisation de traitement de documents.":
         "21"
   };
 

@@ -33,12 +33,12 @@ class _JobDescriptionPersonalityTraitFamiliesFormScreenState
     "1",
     "Je m'exprime à travers des formes d'expression personnelle, me permettant d’explorer mon imagination.":
     "2",
-    "J'apprécie aider mes voisins à décharger leur camion de déménagement, même si cela signifie porter des objets lourds.":
+    "J'apprécie d'aider mes voisins à décharger leur camion de déménagement, même si cela signifie porter des objets lourds.":
     "3",
     "Je suis efficace pour établir des liens avec de nouvelles personnes lors d’événements sociaux.": "4",
     "Je me sens épanoui en transformant mes idées en projets concrets remplis de créativité.": "5",
     "Je m'efforce de prioriser mes activités en fonction de leur importance et de l'urgence pour ne pas me sentir dépassé.": "6",
-    "J'observe mes propres émotions, je suis capables d'appréhender celles des autres pour réagir de manière appropriée.": "7",
+    "J'observe mes propres émotions, je suis capable d'appréhender celles des autres pour réagir de manière appropriée.": "7",
     "Je prends toujours la responsabilité de mes erreurs, cherchant à rectifier les choses plutôt que de les dissimuler.":
     "8",
     "Je suis celui qui prend l'initiative de planifier et de coordonner des événements, inspirant ainsi les autres à participer activement.":
