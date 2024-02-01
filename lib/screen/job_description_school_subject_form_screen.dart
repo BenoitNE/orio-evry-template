@@ -173,16 +173,16 @@ class _JobDescriptionSchoolSubjectFormScreenState
         .getUpdatedJobDescriptionBySectorFamily(filteredJobDescriptions, _getSector());
 
     for (int i = 0; i < jobDescriptionQuantity; i++) {
-      JobDescriptionFormUtil.jobDescriptions!
+      JobDescriptionFormUtil.jobDescriptionsFirstFiltered
           .add(filteredJobDescriptions[i]);
     }
 
     JobDescriptionFormUtil.negativeSentences = jobDescriptionFilter
-        .getNegativeSentenceForFilter(JobDescriptionFormUtil.jobDescriptions!);
+        .getNegativeSentenceForFilter(JobDescriptionFormUtil.jobDescriptionsFirstFiltered);
 
     if (JobDescriptionFormUtil.negativeSentences!.isEmpty) {
       JobDescriptionFormUtil.sectors = jobDescriptionFilter
-          .getSectorForFilter(JobDescriptionFormUtil.jobDescriptions!);
+          .getSectorForFilter(JobDescriptionFormUtil.jobDescriptionsFirstFiltered);
       Navigator.pushNamed(context, RoutingUtil.jobDescriptionSectorFormScreen);
     } else {
       Navigator.pushNamed(

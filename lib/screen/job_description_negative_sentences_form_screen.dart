@@ -136,12 +136,12 @@ class _JobDescriptionNegativeSentencesFormScreenState
 
   void _fetchFilteredJobDescriptionList(){
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
-    JobDescriptionFormUtil.jobDescriptions =
+    JobDescriptionFormUtil.jobDescriptionsFilteredByNegativeSentences =
         jobDescriptionFilter.getFilteredJobDescriptionByNegativeSentence(
-            JobDescriptionFormUtil.jobDescriptions!,
+            JobDescriptionFormUtil.jobDescriptionsFirstFiltered,
             _selectedNegativeSentences);
     JobDescriptionFormUtil.sectors = jobDescriptionFilter
-        .getSectorForFilter(JobDescriptionFormUtil.jobDescriptions!);
+        .getSectorForFilter(JobDescriptionFormUtil.jobDescriptionsFilteredByNegativeSentences);
     Navigator.pushNamed(context, RoutingUtil.jobDescriptionSectorFormScreen);
 
   }

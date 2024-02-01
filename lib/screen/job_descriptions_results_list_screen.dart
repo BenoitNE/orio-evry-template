@@ -20,7 +20,7 @@ class JobDescriptionResultsListScreen extends StatefulWidget {
 class _JobDescriptionResultsListScreenState
     extends State<JobDescriptionResultsListScreen> {
   final List<JobDescription> _jobDescriptions =
-      JobDescriptionFormUtil.jobDescriptions!;
+      JobDescriptionFormUtil.displayedJobDescriptions;
 
   @override
   Widget build(BuildContext context) {

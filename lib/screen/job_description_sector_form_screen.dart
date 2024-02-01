@@ -129,12 +129,21 @@ class _JobDescriptionSectorFormScreenState
 
   void _fetchFilteredJobDescriptionList() {
     JobDescriptionFilter jobDescriptionFilter = JobDescriptionFilter();
-    JobDescriptionFormUtil.jobDescriptions =
-        jobDescriptionFilter.getFilteredJobDescriptionBySector(
-            JobDescriptionFormUtil.jobDescriptions!,
-            _selectedSectors);
-    jobDescriptionFilter.setJobDescriptionStar(JobDescriptionFormUtil.jobDescriptions);
-    Navigator.pushNamed(context, _forwardScreenPath);
+    if (JobDescriptionFormUtil
+        .jobDescriptionsFilteredByNegativeSentences.isNotEmpty) {
+      JobDescriptionFormUtil.displayedJobDescriptions =
+          jobDescriptionFilter.getFilteredJobDescriptionBySector(
+              JobDescriptionFormUtil.jobDescriptionsFilteredByNegativeSentences,
+              _selectedSectors);
+    } else {
+      JobDescriptionFormUtil.displayedJobDescriptions =
+          jobDescriptionFilter.getFilteredJobDescriptionBySector(
+              JobDescriptionFormUtil.jobDescriptionsFirstFiltered,
+              _selectedSectors);
+    }
 
+    jobDescriptionFilter
+        .setJobDescriptionStar(JobDescriptionFormUtil.displayedJobDescriptions);
+    Navigator.pushNamed(context, _forwardScreenPath);
   }
 }
